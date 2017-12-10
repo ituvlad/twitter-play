@@ -13,13 +13,15 @@ function tweetsReducer(
 ) {
   function getParameterByName(name, url) {
     if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
+    name = name.replace(/[[]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
       results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
+
+  console.log("Reducer action :", action.type);
   switch (action.type) {
     case ACTIONS_LIST.RESET_TWEETS:
       return Object.assign({}, state, {
@@ -34,7 +36,6 @@ function tweetsReducer(
         error: null
       })
     case ACTIONS_LIST.RECEIVE_TWEETS:
-    console.log('!!!!!!!!!!!!!!!!!!!!reducer receive tweets');    
       return Object.assign({}, state, {
         loading: false,
         error: null,

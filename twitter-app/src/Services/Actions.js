@@ -28,7 +28,7 @@ export function resetTweets(){
         type : ACTIONS_LIST.RESET_TWEETS
     }
 }
-export function receiveTweets(data) {
+export function receiveTweets(data) {    
     return {
         type: ACTIONS_LIST.RECEIVE_TWEETS,
         data: data
