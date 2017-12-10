@@ -3,7 +3,6 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Home from 'Components/Home'
 import TweetFeed from 'Components/TweetFeed'
 import Menu from 'Components/Menu'
-import Logout from 'Components/Logout'
 import 'App.css';
 
 class App extends Component {
@@ -22,8 +21,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route path="/DonaldTrump" component={()=><TweetFeed token={this.state.token} name="Donald Trump"></TweetFeed>}/>
-              <Route path="/HillaryClinton" component={()=><TweetFeed token={this.state.token}  name="Hillary Clinton"></TweetFeed>}/>
-              <Route path="/Logout" component={() => <Logout/>} />
+              <Route path="/HillaryClinton" component={()=><TweetFeed token={this.state.token}  name="Hillary Clinton"></TweetFeed>}/>              
             </Switch>
           </div>
         </BrowserRouter>
