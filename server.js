@@ -26,5 +26,14 @@ app.get('/tweets/:name/:max_id/:count', (req, res) => {
     })
 })
 
+var stream = client.stream('statuses/filter', {track: 'Donald Trump'});
+stream.on('data', function(event) {
+  console.log(event.id +"   -   " + event.text);
+  console.log("");
+});
+ 
+stream.on('error', function(error) {
+  throw error;
+});
 
 app.listen(3001, () => console.log('Example app listening on port 3001!'))

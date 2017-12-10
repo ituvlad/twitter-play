@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Actions } from "Services/Actions.js"
 import { connect } from "react-redux";
 import Tweet from "Components/TweetFeed/Tweet";
+import { ACTIONS_LIST } from "Services/Actions.js"
+import { fetchTweets } from "Services/Fetchers.js"
 
 class TweetFeed extends Component {
   componentDidMount() {
@@ -9,14 +11,15 @@ class TweetFeed extends Component {
     this.loadMore();    
   }
   reset() {
-    this.props.dispatch(new Actions().resetTweets());
+    const action = type => this.props.dispatch({type});
+    action(ACTIONS_LIST.RESET_TWEETS);
   }
   loadMore() {    
     if(this.props.loading){
       return;
     }    
     console.log("Loading more");
-    this.props.dispatch(new Actions().fetchTweets(this.props.name, this.props.max_id, 10));    
+    this.props.dispatch(fetchTweets(this.props.name, this.props.max_id, 10));
   }
   render() {    
     return (      

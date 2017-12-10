@@ -33,7 +33,8 @@ function tweetsReducer(
         loading: true,
         error: null
       })
-    case ACTIONS_LIST.RECEIVE_TWEETS:    
+    case ACTIONS_LIST.RECEIVE_TWEETS:
+    console.log('!!!!!!!!!!!!!!!!!!!!reducer receive tweets');    
       return Object.assign({}, state, {
         loading: false,
         error: null,
@@ -51,7 +52,6 @@ function tweetsReducer(
       return state
   }
 }
-
 
 const rootReducer = combineReducers({
   tweetsReducer
