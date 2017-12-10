@@ -1,0 +1,24 @@
+{
+  "name": "twitter-backend",
+  "version": "1.0.0",
+  "description": "This is the nodejs backend for the twitter tweets app.",
+  "main": "server.js",
+  "dependencies": {
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btoda/twitter-play.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/btoda/twitter-play/issues"
+  },
+  "homepage": "https://github.com/btoda/twitter-play#readme"
+}
