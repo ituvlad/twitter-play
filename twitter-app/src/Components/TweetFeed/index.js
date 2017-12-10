@@ -17,6 +17,18 @@ class TweetFeed extends Component {
     }
     var actionName = ACTIONS_LIST.REQUEST_TWEETS;
     this.props.dispatch({type: actionName, payload: {query:this.props.name, max_id:this.props.max_id, count:10}})
+    
+    var action = type => this.props.dispatch({type});
+    const io = require('socket.io-client');
+    var socket = io.connect('http://localhost:3001');
+    socket.on('connect', function(data) {
+       socket.emit('join', 'Hello World from client');
+    });
+    socket.on('messages', function(data) {
+        console.log(data);
+        action({type: ACTIONS_LIST.WATCH_RECEIVE_TWEETS, payload:  data})        
+    });
+    
   }
   render() {    
     return (      

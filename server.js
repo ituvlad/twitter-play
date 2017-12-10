@@ -1,11 +1,12 @@
 var Twitter = require('twitter');
 var config = require('./config.js');
 const express = require('express');
+const socketIo = require("socket.io");
 const app = express()
 
-var client = new Twitter(config.twitter);
+var twitterClient = new Twitter(config.twitter);
 
-console.log(client);
+console.log(twitterClient);
 
 app.get('/', (req, res) => res.sendFile('./public/index.html', { "root": __dirname }))
 
@@ -21,19 +22,28 @@ app.get('/tweets/:name/:max_id/:count', (req, res) => {
         params.max_id = max_id;
     }
     console.log(params);
-    client.get("search/tweets", params, (error, tweets, response) => {
+    twitterClient.get("search/tweets", params, (error, tweets, response) => {
         res.json(tweets);
     })
 })
 
-var stream = client.stream('statuses/filter', {track: 'Donald Trump'});
-stream.on('data', function(event) {
-  console.log(event.id +"   -   " + event.text);
-  console.log("");
-});
- 
-stream.on('error', function(error) {
-  throw error;
-});
+var server = app.listen(3001, () => console.log('Example app listening on port 3001!'))
 
-app.listen(3001, () => console.log('Example app listening on port 3001!'))
+var io = require('socket.io')(server);
+io.on('connection', function(client) {  
+    console.log('Client connected...');
+    var stream = twitterClient.stream('statuses/filter', {track: 'Donald Trump'});
+
+    client.on('join', function(data) {
+        console.log(data);
+        client.emit('messages', 'Hello from server');
+
+        stream.on('data', function(event) {
+            client.emit('messages', event);
+        });
+
+        stream.on('error', function(error) {
+            console.log(error);
+        });
+    })
+});

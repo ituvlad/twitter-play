@@ -12,9 +12,10 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "0.9.5",
     "redux": "^3.7.2",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "socket.io-client": "^2.0.4"
   },
-  "devDependencies": { },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
